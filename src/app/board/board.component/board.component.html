@@ -1,0 +1,84 @@
+<!-- Gereksinim formu -->
+<details class="card collapsible" style="margin-bottom:12px">
+  <summary class="collapse-summary">
+    YENİ GEREKSİNİM EKLE
+    <span class="chev">▸</span>
+  </summary>
+  <div class="collapse-body">
+    <app-requirement-form></app-requirement-form>
+  </div>
+</details>
+
+<section class="columns">
+  <!-- Planlanan -->
+  <div
+    class="column planned"
+    cdkDropList
+    id="planned"
+    [cdkDropListData]="store.planned()"
+    [cdkDropListConnectedTo]="['active','done']"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <h3 class="section-title">
+      Planlanan <span class="counter">({{ store.planned().length }})</span>
+    </h3>
+    @if (store.planned().length === 0) {
+      <div class="empty">Henüz planlanan gereksinim yok.</div>
+    }
+    @for (r of store.planned(); track r.id) {
+      <app-requirement-card
+        cdkDrag
+        [cdkDragData]="r"
+        [req]="r"
+      ></app-requirement-card>
+    }
+  </div>
+
+  <!-- Aktif -->
+  <div
+    class="column active"
+    cdkDropList
+    id="active"
+    [cdkDropListData]="store.active()"
+    [cdkDropListConnectedTo]="['planned','done']"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <h3 class="section-title">
+      AKTİF <span class="counter">({{ store.active().length }})</span>
+    </h3>
+    @if (store.active().length === 0) {
+      <div class="empty">Şu anda aktif çalışma yok.</div>
+    }
+    @for (r of store.active(); track r.id) {
+      <app-requirement-card
+        cdkDrag
+        [cdkDragData]="r"
+        [req]="r"
+      ></app-requirement-card>
+    }
+  </div>
+
+  <!-- Tamamlanan -->
+  <div
+    class="column done"
+    cdkDropList
+    id="done"
+    [cdkDropListData]="store.done()"
+    [cdkDropListConnectedTo]="['planned','active']"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <h3 class="section-title">
+      Tamamlanan <span class="counter">({{ store.done().length }})</span>
+    </h3>
+    @if (store.done().length === 0) {
+      <div class="empty">Tamamlanan gereksinim bulunmuyor.</div>
+    }
+    @for (r of store.done(); track r.id) {
+      <app-requirement-card
+        cdkDrag
+        [cdkDragData]="r"
+        [req]="r"
+      ></app-requirement-card>
+    }
+  </div>
+</section>

@@ -1,0 +1,43 @@
+<div class="header-row" style="margin-top:8px; margin-bottom:12px">
+  <div class="left">
+    <span class="badge">Roadmap</span>
+    <strong class="app-title">Projeler</strong>
+
+    <select
+      class="select"
+      [ngModel]="store.selectedProjectId()"
+      (ngModelChange)="store.selectProject($event)"
+    >
+      <option value="" disabled>Proje seçin…</option>
+      @for (p of store.projects(); track p.id) {
+        <option [ngValue]="p.id">{{ p.name }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="right">
+    <!-- Proje yoksa bu grup görünmez -->
+    @if (store.projects().length > 0) {
+      <div class="right-tools reveal">
+        <button
+          class="btn ghost"
+          (click)="renameProject()"
+          [disabled]="!store.selectedProjectId()"
+        >
+          Yeniden Adlandır
+        </button>
+
+        <button
+          class="btn ghost danger"
+          (click)="deleteProject()"
+          [disabled]="!store.selectedProjectId()"
+        >
+          Projeyi Sil
+        </button>
+      </div>
+    }
+
+    <!-- Yeni Proje -->
+    <button class="btn new-btn" (click)="createProject()">Yeni Proje</button>
+  </div>
+</div>

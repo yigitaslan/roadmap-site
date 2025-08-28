@@ -1,0 +1,49 @@
+/* Kolon kenarlıkları */
+.column{ border-width:2px }
+.column.planned{ border-color: var(--primary); }
+.column.active { border-color: var(--danger);  }
+.column.done   { border-color: var(--success); }
+
+/* Başlık sol şeritleri sütuna göre renkli */
+.column.planned .section-title::before{ background: var(--primary); }
+.column.active  .section-title::before{ background: var(--danger); }
+.column.done    .section-title::before{ background: var(--success); }
+
+/* Açılır/kapanır form kartı */
+.collapsible{
+  padding:0;
+}
+.collapse-summary{
+  list-style:none;
+  cursor:pointer;
+  user-select:none;
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  padding:10px 14px;
+  font-weight:800; font-size:13px; letter-spacing:.03em; text-transform:uppercase;
+  border-bottom:1px solid var(--border);
+}
+.collapsible[open] .collapse-summary{
+  background:#f8fafc;
+}
+.collapse-body{
+  padding:12px 14px;
+}
+
+/* Küçük görsel ipucu oku */
+.chev{
+  transition: transform .15s ease;
+}
+.collapsible[open] .chev{
+  transform: rotate(90deg);
+}
+
+/* Drag&Drop */
+.cdk-drag-preview{
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  border-radius: var(--radius);
+}
+.cdk-drag-placeholder{ opacity: 0; }
+.cdk-drop-list.cdk-drop-list-dragging{
+  outline: 1px dashed #d1d5db;
+  outline-offset: -6px;
+}

@@ -1,0 +1,53 @@
+<div class="card">
+  <div style="display:flex; justify-content:space-between; align-items:start; gap:8px">
+    <div>
+      <div style="font-weight:700">{{ req.title }}</div>
+      @if (req.description) {
+        <div style="color:var(--muted); font-size:13px; margin-top:4px">{{ req.description }}</div>
+      }
+    </div>
+    <!-- Sil butonu -->
+    <button
+      class="btn ghost delete-btn"
+      title="Sil"
+      aria-label="Sil"
+      (click)="remove()"
+    >
+      Sil
+    </button>
+  </div>
+
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px">
+    <!-- Planlanan kartlar -->
+    <span class="badge" [class.info]="req.status === 'planned'" title="Belirlendiği tarih">
+      Belirlendi: {{ date(req.decidedAt) }}
+    </span>
+
+    <!-- Aktif kartlar -->
+    @if (req.startedAt) {
+      <span class="badge" [class.danger]="req.status === 'active'" title="Başlangıç">
+        Başlangıç: {{ date(req.startedAt) }}
+      </span>
+    }
+
+    <!-- Tamamlanan kartlar -->
+    @if (req.completedAt) {
+      <span class="badge success" title="Tamamlandı">
+        Tamamlandı: {{ date(req.completedAt) }}
+      </span>
+    }
+  </div>
+
+  <div class="actions">
+    @if (req.status === 'planned') {
+      <button class="btn action-btn" (click)="start()">Aktife Al</button>
+    }
+    @if (req.status === 'active') {
+      <button class="btn action-btn" (click)="backToPlanned()">Planlanan</button>
+      <button class="btn primary action-btn" (click)="complete()">Tamamla</button>
+    }
+    @if (req.status === 'done') {
+      <button class="btn action-btn" (click)="backToPlanned()">Yeniden Planla</button>
+    }
+  </div>
+</div>

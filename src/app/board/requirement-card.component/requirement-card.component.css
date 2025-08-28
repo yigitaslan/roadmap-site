@@ -1,0 +1,64 @@
+/* Kartlar gri kenarlık */
+.card{
+  border-color: var(--border);
+  border-radius: var(--radius);
+}
+
+/* Sil butonu */
+.delete-btn{
+  padding: 4px 8px;
+  font-size: 12px;
+  border-color: transparent;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity .15s ease, color .15s ease, border-color .15s ease;
+}
+.card:hover .delete-btn{
+  opacity: 1;
+  border-color: var(--border);
+}
+.delete-btn:hover{
+  color: #374151;
+  border-color: var(--border);
+}
+
+/* Aksiyon butonları */
+.actions{
+  border-top:1px solid var(--border);
+  padding-top:8px; margin-top:10px;
+}
+
+/* Tüm action butonları */
+.actions .action-btn{
+  padding: 6px 10px;
+  font-size: 12px;
+  border-color: transparent;
+  color: var(--muted);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s ease, color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.card:hover .actions .action-btn:not(.primary){
+  border-color: var(--border);
+}
+.card:hover .actions .action-btn{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.actions .action-btn:not(.primary):hover{
+  color: #374151;
+  border-color: var(--border);
+}
+
+.actions .action-btn.primary{
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.actions .action-btn.primary:hover{
+  background: var(--primary-600);
+  border-color: var(--primary-600);
+  color: #fff;
+}
