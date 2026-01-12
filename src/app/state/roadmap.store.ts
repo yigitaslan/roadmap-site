@@ -113,7 +113,6 @@ export class RoadmapStore {
     this._persist('requirements', this._requirements());
   }
 
-  /* Drag&Drop sonrası projenin gereksinim sırasını, verilen ID dizisine göre günceller. */
   reorderByIds(projectId: string, orderedIds: string[]) {
     this._requirements.update((map) => {
       const existing = map[projectId] ?? [];
@@ -124,7 +123,6 @@ export class RoadmapStore {
         const r = byId.get(id);
         if (r) nextArr.push(r);
       }
-      // orderedIds dışındaki kalanları sona ekle
       for (const r of existing) {
         if (!orderedIds.includes(r.id)) nextArr.push(r);
       }
@@ -165,7 +163,6 @@ export class RoadmapStore {
     } catch {}
   }
 
-  /* Seçili proje yoksa veya artık mevcut değilse uygun bir id seç */
   private _ensureValidSelection() {
     const id = this._selectedProjectId();
     const exists = this._projects().some((p) => p.id === id);
